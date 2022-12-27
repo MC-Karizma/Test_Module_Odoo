@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'views/kzm_instance_request_views.xml',
         'views/odoo_version_views.xml',
+        'data/data.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
