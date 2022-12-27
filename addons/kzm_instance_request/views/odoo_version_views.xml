@@ -1,0 +1,75 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="odoo_version_list_view">
+      <field name="name">List </field>
+      <field name="model">odoo.version</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+
+        </tree>
+      </field>
+    </record>
+
+
+    <!-- explicit form view definition -->
+
+    <record model="ir.ui.view" id="odoo_version_form_view">
+      <field name="name">Request</field>
+      <field name="model">odoo.version</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+
+          </group>
+        </form>
+      </field>
+    </record>
+
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="odoo_version_action_window">
+      <field name="name">Instance window</field>
+      <field name="res_model">odoo.version</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="kzm_instance_request.action_server">
+      <field name="name">kzm_instance_request server</field>
+      <field name="model_id" ref="model_kzm_instance_request_kzm_instance_request"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+
+    <!--<menuitem name="Odoo Version management" id="odoo_version.menu_root"/>-->
+
+    <!-- menu categories -->
+
+    <menuitem name="Version" id="odoo_version_cat" parent="kzm_instance_request.menu_root"/>
+    <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
+
+    <!-- actions -->
+
+    <menuitem name="List" id="odoo_version_list" parent="odoo_version_cat"
+              action="odoo_version_action_window" />
+   <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
+              action="kzm_instance_request.action_server"/>
+-->
+  </data>
+</odoo>
