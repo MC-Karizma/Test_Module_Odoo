@@ -7,17 +7,13 @@
       <field name="model">kzm.instance.request</field>
       <field name="arch" type="xml">
         <tree>
+          <field name="create_uid"/>
           <field name="name"/>
-          <field name="address_ip"/>
-          <field name="active"/>
+          <field name="limit_date"/>
           <field name="cpu"/>
           <field name="ram"/>
           <field name="disk"/>
-          <field name="url"/>
           <field name="state"/>
-          <field name="limit_date"/>
-          <field name="treat_date"/>
-          <field name="treat_duration"/>
         </tree>
       </field>
     </record>
