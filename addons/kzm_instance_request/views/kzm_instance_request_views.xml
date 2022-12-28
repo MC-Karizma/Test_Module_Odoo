@@ -1,110 +1,121 @@
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
+    <data>
+        <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="kzm_instance_request_list_view">
-      <field name="name">List of instance</field>
-      <field name="model">kzm.instance.request</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="create_uid"/>
-          <field name="name"/>
-          <field name="limit_date"/>
-          <field name="cpu"/>
-          <field name="ram"/>
-          <field name="disk"/>
-          <field name="state"/>
-        </tree>
-      </field>
-    </record>
-
-
-    <!-- explicit search view definition -->
-
-    <record model="ir.ui.view" id="kzm_instance_request_search_view">
-      <field name="name">search</field>
-      <field name="model">kzm.instance.request</field>
-      <field name="arch" type="xml">
-        <search>
-          <field name="name"/>
-          <field name="address_ip"/>
-          <field name="state"/>
-        </search>
-      </field>
-    </record>
+        <record model="ir.ui.view" id="kzm_instance_request_list_view">
+            <field name="name">List of instance</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="create_uid"/>
+                    <field name="name"/>
+                    <field name="limit_date"/>
+                    <field name="cpu"/>
+                    <field name="ram"/>
+                    <field name="disk"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
 
 
-    <!-- explicit form view definition -->
+        <!-- explicit search view definition -->
 
-    <record model="ir.ui.view" id="kzm_instance_request_form_view">
-      <field name="name">Request instance</field>
-      <field name="model">kzm.instance.request</field>
-      <field name="arch" type="xml">
-        <form>
-          <group>
-            <field name="name"/>
-            <field name="address_ip"/>
-            <field name="active"/>
-            <field name="cpu"/>
-            <field name="ram"/>
-            <field name="disk"/>
-            <field name="url"/>
-            <field name="state"/>
-            <field name="limit_date"/>
-            <field name="treat_date"/>
-            <field name="treat_duration"/>
-          </group>
-        </form>
-      </field>
-    </record>
+        <record model="ir.ui.view" id="kzm_instance_request_search_view">
+            <field name="name">search</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="address_ip"/>
+                    <field name="state"/>
+                </search>
+            </field>
+        </record>
 
 
-    <!-- actions opening views on models -->
+        <!-- explicit form view definition -->
 
-    <record model="ir.actions.act_window" id="kzm_instance_request_action_window">
-      <field name="name">Instance window</field>
-      <field name="res_model">kzm.instance.request</field>
-      <field name="view_mode">tree,form</field>
-    </record>
+        <record model="ir.ui.view" id="kzm_instance_request_form_view">
+            <field name="name">Request instance</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="address_ip"/>
+                                <field name="url"/>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="cpu"/>
+                                <field name="ram"/>
+                                <field name="disk"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                                <field name="state"/>
+                                <field name="limit_date"/>
+                            </group>
+                            <group rowspan="3">
+                                <field name="treat_date"/>
+                                <field name="treat_duration"/>
+                            </group>
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
 
 
-    <!-- server action to the one above -->
-<!--
-    <record model="ir.actions.server" id="kzm_instance_request.action_server">
-      <field name="name">kzm_instance_request server</field>
-      <field name="model_id" ref="model_kzm_instance_request_kzm_instance_request"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": model._name,
-        }
-      </field>
-    </record>
--->
+        <!-- actions opening views on models -->
 
-    <!-- Top menu item -->
+        <record model="ir.actions.act_window" id="kzm_instance_request_action_window">
+            <field name="name">Instance window</field>
+            <field name="res_model">kzm.instance.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
 
-    <menuitem name="Instance" id="kzm_instance_request.menu_root"/>
 
-    <!-- menu categories -->
+        <!-- server action to the one above -->
+        <!--
+            <record model="ir.actions.server" id="kzm_instance_request.action_server">
+              <field name="name">kzm_instance_request server</field>
+              <field name="model_id" ref="model_kzm_instance_request_kzm_instance_request"/>
+              <field name="state">code</field>
+              <field name="code">
+                action = {
+                  "type": "ir.actions.act_window",
+                  "view_mode": "tree,form",
+                  "res_model": model._name,
+                }
+              </field>
+            </record>
+        -->
 
-    <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
-    <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
+        <!-- Top menu item -->
 
-    <!-- actions -->
+        <menuitem name="Instance" id="kzm_instance_request.menu_root"/>
 
-    <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
-              action="kzm_instance_request_action_window" />
+        <!-- menu categories -->
 
-    <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
+        <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
-    <menuitem name="Analyse" id="kzm_instance_analyser" parent="kzm_instance_request.menu_root"/>
+        <!-- actions -->
 
-    <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"/>
-   <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
-              action="kzm_instance_request.action_server"/>
--->
-  </data>
+        <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
+                  action="kzm_instance_request_action_window"/>
+
+        <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"/>
+
+        <menuitem name="Analyse" id="kzm_instance_analyser" parent="kzm_instance_request.menu_root"/>
+
+        <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"/>
+        <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
+                   action="kzm_instance_request.action_server"/>
+     -->
+    </data>
 </odoo>
