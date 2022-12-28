@@ -19,6 +19,21 @@
     </record>
 
 
+    <!-- explicit search view definition -->
+
+    <record model="ir.ui.view" id="kzm_instance_request_search_view">
+      <field name="name">search</field>
+      <field name="model">kzm.instance.request</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="address_ip"/>
+          <field name="state"/>
+        </search>
+      </field>
+    </record>
+
+
     <!-- explicit form view definition -->
 
     <record model="ir.ui.view" id="kzm_instance_request_form_view">
