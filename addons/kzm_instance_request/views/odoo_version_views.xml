@@ -78,12 +78,12 @@
 
     <!-- menu categories -->
 
-    <menuitem name="Version" id="odoo_version_cat" parent="kzm_instance_request.menu_root"/>
+    <menuitem name="Versions" id="odoo_version_cat" parent="kzm_instance_configuration"/>
     <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
     <!-- actions -->
 
-    <menuitem name="List" id="odoo_version_list" parent="odoo_version_cat"
+    <menuitem name="List of odoo versions" id="odoo_version_list" parent="odoo_version_cat"
               action="odoo_version_action_window" />
    <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
               action="kzm_instance_request.action_server"/>

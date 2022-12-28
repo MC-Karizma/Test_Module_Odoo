@@ -86,17 +86,23 @@
 
     <!-- Top menu item -->
 
-    <menuitem name="Instance management" id="kzm_instance_request.menu_root"/>
+    <menuitem name="Instance" id="kzm_instance_request.menu_root"/>
 
     <!-- menu categories -->
 
-    <menuitem name="Instance" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
+    <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
     <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
     <!-- actions -->
 
-    <menuitem name="List of instance" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
+    <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
               action="kzm_instance_request_action_window" />
+
+    <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"/>
+
+    <menuitem name="Analyse" id="kzm_instance_analyser" parent="kzm_instance_request.menu_root"/>
+
+    <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"/>
    <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
               action="kzm_instance_request.action_server"/>
 -->
