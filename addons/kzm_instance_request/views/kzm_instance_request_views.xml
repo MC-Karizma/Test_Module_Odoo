@@ -90,7 +90,7 @@
             <field name="domain">[('create_uid','=',uid)]</field>
         </record>
 
-        <!-- Ajouter les menus Responsables > À valider : qui affiche toutes les demandes en état Soumises et  En traitement-->
+        <!-- Action ajouter les menus Responsables > À valider : qui affiche toutes les demandes en état Soumises et  En traitement-->
 
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_S_IP">
             <field name="name">Request in state submitted or in process</field>
@@ -100,12 +100,25 @@
         </record>
 
 
-        <!-- Ajouter les menus Responsables > Toutes : qui affiche toutes les demandes-->
+        <!-- Action ajouter les menus Responsables > Toutes : qui affiche toutes les demandes-->
 
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all">
             <field name="name">Requests</field>
             <field name="res_model">kzm.instance.request</field>
             <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- server action -->
+        <record model="ir.actions.server" id="action_server_p">
+            <field name="name">Processed</field>
+            <field name="model_id" ref="model_kzm_instance_request"/>
+            <field name="binding_model_id" ref="model_kzm_instance_request"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_processed()
+            </field>
+            <!--<field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]"/>-->
         </record>
 
 
