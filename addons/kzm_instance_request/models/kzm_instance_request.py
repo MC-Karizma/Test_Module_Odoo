@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-
+from datetime import timedelta, date
 from odoo import models, fields, api
 
 
@@ -32,3 +32,8 @@ class KzmInstanceRequest(models.Model):
 
     def action_processed(self):
         self.state = "P"
+
+    def submitted_cron(self):
+        element = self.env['kzm.instance.request'].search([('limit_date', '<=', date.today() + timedelta(days=5))])
+        for x in element:
+            x.state = 'S'
