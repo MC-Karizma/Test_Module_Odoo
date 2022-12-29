@@ -83,6 +83,7 @@
             <field name="name">Instance window</field>
             <field name="res_model">kzm.instance.request</field>
             <field name="view_mode">tree,form</field>
+            <field name="domain">[('create_uid','=',uid)]</field>
         </record>
 
 
