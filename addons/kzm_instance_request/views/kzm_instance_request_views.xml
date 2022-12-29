@@ -55,23 +55,23 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="address_ip"/>
-                                <field name="url"/>
-                                <field name="name" required="True"/>
+                                <field name="address_ip" attrs="{'invisible': [('state', 'in', ('P','I_P','D'))],'readonly': [('state','=','P')]}"/>
+                                <field name="url" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="name" required="True" attrs="{'readonly': [('state','=','P')]}"/>
                             </group>
                             <group>
-                                <field name="cpu"/>
-                                <field name="ram"/>
-                                <field name="disk"/>
+                                <field name="cpu" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="ram" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="disk" attrs="{'readonly': [('state','=','P')]}"/>
                             </group>
                             <group>
-                                <field name="active"/>
-                                <field name="state"/>
-                                <field name="limit_date" required="True"/>
+                                <field name="active" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="state" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="limit_date" required="True" attrs="{'readonly': [('state','=','P')]}"/>
                             </group>
                             <group rowspan="3">
-                                <field name="treat_date"/>
-                                <field name="treat_duration"/>
+                                <field name="treat_date" attrs="{'readonly': [('state','=','P')]}"/>
+                                <field name="treat_duration" attrs="{'readonly': [('state','=','P')]}"/>
                             </group>
                         </group>
                     </sheet>
@@ -100,14 +100,13 @@
         </record>
 
 
-         <!-- Ajouter les menus Responsables > Toutes : qui affiche toutes les demandes-->
+        <!-- Ajouter les menus Responsables > Toutes : qui affiche toutes les demandes-->
 
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all">
             <field name="name">Requests</field>
             <field name="res_model">kzm.instance.request</field>
             <field name="view_mode">tree,form</field>
         </record>
-
 
 
         <!-- server action to the one above -->
