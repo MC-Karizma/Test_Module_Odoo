@@ -41,6 +41,13 @@
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button id="button_draft" name="action_draft"  string="Draft" type="object" class="oe_highlight" states="S,P"/>
+                        <button id="button_submitted"  name="action_submitted" string="Submitted" type="object" class="oe_highlight" states="D"/>
+                        <button id="button_in_process" name="action_in_process"  string="In process" type="object" class="oe_highlight" states="S"/>
+                        <button id="button_processed" name="action_processed"  string="Processed" type="object" class="oe_highlight" states="I_P"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <group>
                             <group>

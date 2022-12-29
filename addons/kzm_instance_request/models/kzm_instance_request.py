@@ -20,3 +20,15 @@ class KzmInstanceRequest(models.Model):
     limit_date = fields.Date()
     treat_date = fields.Datetime()
     treat_duration = fields.Float()
+
+    def action_draft(self):
+        self.state = "D"
+
+    def action_submitted(self):
+        self.state = "S"
+
+    def action_in_process(self):
+        self.state = "I_P"
+
+    def action_processed(self):
+        self.state = "P"
