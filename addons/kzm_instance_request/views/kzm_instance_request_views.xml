@@ -109,7 +109,7 @@
         </record>
 
 
-        <!-- server action -->
+        <!-- Action server  -->
         <record model="ir.actions.server" id="action_server_p">
             <field name="name">Processed</field>
             <field name="model_id" ref="model_kzm_instance_request"/>
@@ -122,7 +122,7 @@
         </record>
 
 
-         <!-- scheduled action -->
+         <!-- Action  scheduled -->
         <record id="submitted_cron" model="ir.cron">
             <field name="name">Submitted</field>
             <field name="model_id" ref="model_kzm_instance_request"/>
