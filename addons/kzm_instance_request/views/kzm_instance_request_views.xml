@@ -42,10 +42,14 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button id="button_draft" name="action_draft"  string="Draft" type="object" class="oe_highlight" states="S,P"/>
-                        <button id="button_submitted"  name="action_submitted" string="Submitted" type="object" class="oe_highlight" states="D"/>
-                        <button id="button_in_process" name="action_in_process"  string="In process" type="object" class="oe_highlight" states="S"/>
-                        <button id="button_processed" name="action_processed"  string="Processed" type="object" class="oe_highlight" states="I_P"/>
+                        <button id="button_draft" name="action_draft" string="Draft" type="object" class="oe_highlight"
+                                states="S,P"/>
+                        <button id="button_submitted" name="action_submitted" string="Submitted" type="object"
+                                class="oe_highlight" states="D"/>
+                        <button id="button_in_process" name="action_in_process" string="In process" type="object"
+                                class="oe_highlight" states="S"/>
+                        <button id="button_processed" name="action_processed" string="Processed" type="object"
+                                class="oe_highlight" states="I_P"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -53,7 +57,7 @@
                             <group>
                                 <field name="address_ip"/>
                                 <field name="url"/>
-                                <field name="name"/>
+                                <field name="name" required="True"/>
                             </group>
                             <group>
                                 <field name="cpu"/>
@@ -63,7 +67,7 @@
                             <group>
                                 <field name="active"/>
                                 <field name="state"/>
-                                <field name="limit_date"/>
+                                <field name="limit_date" required="True"/>
                             </group>
                             <group rowspan="3">
                                 <field name="treat_date"/>
@@ -85,6 +89,25 @@
             <field name="view_mode">tree,form</field>
             <field name="domain">[('create_uid','=',uid)]</field>
         </record>
+
+        <!-- Ajouter les menus Responsables > À valider : qui affiche toutes les demandes en état Soumises et  En traitement-->
+
+        <record model="ir.actions.act_window" id="kzm_instance_request_action_window_S_IP">
+            <field name="name">Request in state submitted or in process</field>
+            <field name="res_model">kzm.instance.request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">['|',('state','=','S'),('state','=','I_P')]</field>
+        </record>
+
+
+         <!-- Ajouter les menus Responsables > Toutes : qui affiche toutes les demandes-->
+
+        <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all">
+            <field name="name">Requests</field>
+            <field name="res_model">kzm.instance.request</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
 
 
         <!-- server action to the one above -->
@@ -118,10 +141,16 @@
                   action="kzm_instance_request_action_window"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="To be validated" id="kzm_instance_to_be_validated" parent="kzm_instance_manager"
+                  action="kzm_instance_request_action_window_S_IP"/>
+        <menuitem name="All" id="kzm_instance_all" parent="kzm_instance_manager"
+                  action="kzm_instance_request_action_window_all"/>
 
-        <menuitem name="Analyse" id="kzm_instance_analyser" parent="kzm_instance_request.menu_root"/>
+
+        <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root"/>
 
         <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"/>
+
         <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
                    action="kzm_instance_request.action_server"/>
      -->
