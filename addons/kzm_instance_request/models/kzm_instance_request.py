@@ -9,7 +9,7 @@ class KzmInstanceRequest(models.Model):
     _description = 'Request for Proceedings'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
-    name = fields.Char(string="Designation")
+    name = fields.Char(string="Designation", tracking=True)
     address_ip = fields.Char(string="IP Address")
     active = fields.Boolean(string="Active", default=True)
     cpu = fields.Char(string="CPU")
@@ -18,8 +18,8 @@ class KzmInstanceRequest(models.Model):
     url = fields.Char(string="URL")
     state = fields.Selection(
         [('Draft', 'Draft'), ('Submitted', 'Submitted'), ('In process', 'In process'), ('Processed', 'Processed')],
-        default='Draft', string="State")
-    limit_date = fields.Date(string="Limit date")
+        default='Draft', string="State", tracking=True)
+    limit_date = fields.Date(string="Limit date", tracking=True)
     treat_date = fields.Datetime(string="Treat date")
     treat_duration = fields.Float(string="Treat duration")
 
