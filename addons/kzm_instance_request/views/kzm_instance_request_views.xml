@@ -47,9 +47,9 @@
                         <button id="button_submitted" name="action_submitted" string="Submitted" type="object"
                                 class="oe_highlight" states="D"/>
                         <button id="button_in_process" name="action_in_process" string="In process" type="object"
-                                class="oe_highlight" states="S"/>
+                                class="oe_highlight" states="S" groups="kzm_instance_request.group_instance_manager"/>
                         <button id="button_processed" name="action_processed" string="Processed" type="object"
-                                class="oe_highlight" states="I_P"/>
+                                class="oe_highlight" states="I_P" groups="kzm_instance_request.group_instance_manager"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -154,28 +154,28 @@
 
         <!-- Top menu item -->
 
-        <menuitem name="Instance" id="kzm_instance_request.menu_root"/>
+        <menuitem name="Instance" id="kzm_instance_request.menu_root" />
 
         <!-- menu categories -->
 
-        <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_user"/>
         <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
         <!-- actions -->
 
         <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
-                  action="kzm_instance_request_action_window"/>
+                  action="kzm_instance_request_action_window" groups="kzm_instance_request.group_instance_administrator"/>
 
-        <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_manager"/>
         <menuitem name="To be validated" id="kzm_instance_to_be_validated" parent="kzm_instance_manager"
-                  action="kzm_instance_request_action_window_S_IP"/>
+                  action="kzm_instance_request_action_window_S_IP" groups="kzm_instance_request.group_instance_manager"/>
         <menuitem name="All" id="kzm_instance_all" parent="kzm_instance_manager"
-                  action="kzm_instance_request_action_window_all"/>
+                  action="kzm_instance_request_action_window_all" groups="kzm_instance_request.group_instance_manager"/>
 
 
-        <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_user"/>
 
-        <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"/>
+        <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_administrator"/>
 
         <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
                    action="kzm_instance_request.action_server"/>
