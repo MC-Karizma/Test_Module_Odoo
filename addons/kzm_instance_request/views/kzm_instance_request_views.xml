@@ -158,24 +158,24 @@
 
         <!-- menu categories -->
 
-        <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_user"/>
+        <menuitem name="My requests" id="kzm_instance_request_cat" parent="kzm_instance_request.menu_root"/>
         <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
         <!-- actions -->
 
         <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
-                  action="kzm_instance_request_action_window" groups="kzm_instance_request.group_instance_administrator"/>
+                  action="kzm_instance_request_action_window" groups="kzm_instance_request.group_instance_user"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_manager"/>
         <menuitem name="To be validated" id="kzm_instance_to_be_validated" parent="kzm_instance_manager"
-                  action="kzm_instance_request_action_window_S_IP" groups="kzm_instance_request.group_instance_manager"/>
+                  action="kzm_instance_request_action_window_S_IP" />
         <menuitem name="All" id="kzm_instance_all" parent="kzm_instance_manager"
-                  action="kzm_instance_request_action_window_all" groups="kzm_instance_request.group_instance_manager"/>
+                  action="kzm_instance_request_action_window_all" />
 
 
-        <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_user"/>
+        <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window"/>
 
-        <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_administrator"/>
+        <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root" groups="kzm_instance_request.group_instance_administrator" action="kzm_instance_request_action_window"/>
 
         <!-- <menuitem name="Server to list" id="kzm_instance_request" parent="kzm_instance_request.menu_2"
                    action="kzm_instance_request.action_server"/>

@@ -78,7 +78,7 @@
 
         <!-- menu categories -->
 
-        <menuitem name="Versions" id="odoo_version_cat" parent="kzm_instance_configuration"/>
+        <menuitem name="Versions" id="odoo_version_cat" parent="kzm_instance_request.menu_root"/>
         <!--<menuitem name="Menu 2" id="kzm_instance_request.menu_2" parent="kzm_instance_request.menu_root"/>-->
 
         <!-- actions -->
