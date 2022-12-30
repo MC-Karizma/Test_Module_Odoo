@@ -100,6 +100,14 @@
                         </group>
                     </sheet>
 
+                    <div class="oe_chatter">
+
+                        <field name="message_follower_ids" widget="mail_followers"/>
+
+                        <field name="message_ids" widget="mail_thread"/>
+
+                    </div>
+
                 </form>
             </field>
         </record>
@@ -198,7 +206,8 @@
 
         <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
                   action="kzm_instance_request_action_window" groups="kzm_instance_request.group_instance_user"/>
-        <menuitem name="Display list of request 2" id="kzm_instance_request_list2" parent="kzm_instance_request.menu_root"
+        <menuitem name="Display list of request 2" id="kzm_instance_request_list2"
+                  parent="kzm_instance_request.menu_root"
                   action="kzm_instance_request_action_window2" groups="kzm_instance_request.group_instance_user"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"

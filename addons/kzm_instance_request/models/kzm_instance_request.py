@@ -7,6 +7,7 @@ from odoo import models, fields, api
 class KzmInstanceRequest(models.Model):
     _name = 'kzm.instance.request'
     _description = 'Request for Proceedings'
+    _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
     name = fields.Char(string="Designation")
     address_ip = fields.Char(string="IP Address")

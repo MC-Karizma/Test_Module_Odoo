@@ -20,7 +20,7 @@
     'version': '1.O.O',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail', 'portal'],
 
     # always loaded
     'data': [
