@@ -25,6 +25,8 @@
     # always loaded
     'data': [
         'data/activity.xml',
+        'data/kzm_instance_request_mail_template.xml',
+        'data/kzm_instance_request_mail_template2.xml',
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/kzm_instance_request_views.xml',
