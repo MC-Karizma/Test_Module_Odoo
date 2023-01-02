@@ -66,3 +66,9 @@ class KzmInstanceRequest(models.Model):
             if d < date.today():
                 raise ValidationError(_("You cannot set a deadline later than today!"))
         return super(KzmInstanceRequest, self).write(vals)
+
+    @api.onchange('state')
+    def onchange_state(self):
+        if self.state:
+            if self.state == "Processed":
+                self.treat_date = datetime.now()
