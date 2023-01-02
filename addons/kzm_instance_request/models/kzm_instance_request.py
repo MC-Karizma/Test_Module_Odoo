@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
@@ -58,3 +58,11 @@ class KzmInstanceRequest(models.Model):
             if x.state != 'Draft':
                 raise ValidationError(_("You can only delete an instance in \"Draft\" status !"))
             return super(KzmInstanceRequest, x).unlink()
+
+    def write(self, vals):
+        if vals.get('limit_date'):
+            date_time_obj = datetime.strptime(vals['limit_date'], '%Y-%m-%d')
+            d = date_time_obj.date()
+            if d < date.today():
+                raise ValidationError(_("You cannot set a deadline later than today!"))
+        return super(KzmInstanceRequest, self).write(vals)
