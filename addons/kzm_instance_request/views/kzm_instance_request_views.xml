@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
         <!-- explicit list view definition -->
@@ -7,6 +8,7 @@
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="reference"/>
                     <field name="create_uid"/>
                     <field name="name"/>
                     <field name="limit_date"/>
@@ -15,7 +17,7 @@
                     <field name="disk"/>
                     <field name="state"/>
                 </tree>
-
+                <!--
                 <button id="button_draft" name="action_draft" string="Draft" type="object" class="oe_highlight"
                         states="Submitted,Processed"/>
                 <button id="button_submitted" name="action_submitted" string="Submitted" type="object"
@@ -23,7 +25,7 @@
                 <button id="button_in_process" name="action_in_process" string="In process" type="object"
                         class="oe_highlight" states="Submitted" groups="kzm_instance_request.group_instance_manager"/>
                 <button id="button_processed" name="action_processed" string="Processed" type="object"
-                        class="oe_highlight" states="In process" groups="kzm_instance_request.group_instance_manager"/>
+                        class="oe_highlight" states="In process" groups="kzm_instance_request.group_instance_manager"/>-->
 
             </field>
         </record>
@@ -75,6 +77,11 @@
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
+                        <div>
+                            <h1 class="oe_title">
+                                <field name="reference" readonly="1"/>
+                            </h1>
+                        </div>
                         <group>
                             <group>
                                 <field name="address_ip"
@@ -193,7 +200,8 @@
 
         <!-- Top menu item -->
 
-        <menuitem name="Instance" id="kzm_instance_request.menu_root"/>
+        <menuitem name="Instance" id="kzm_instance_request.menu_root"
+                  web_icon="kzm_instance_request,static/description/icon.png"/>
 
         <!-- menu categories -->
 
@@ -205,7 +213,7 @@
         <menuitem name="Display list of request" id="kzm_instance_request_list" parent="kzm_instance_request_cat"
                   action="kzm_instance_request_action_window" groups="kzm_instance_request.group_instance_user"/>
         <menuitem name="Display list of request 2" id="kzm_instance_request_list2"
-                  parent="kzm_instance_request.menu_root"
+                  parent="kzm_instance_request_cat"
                   action="kzm_instance_request_action_window2" groups="kzm_instance_request.group_instance_user"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"

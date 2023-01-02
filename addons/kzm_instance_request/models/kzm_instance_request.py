@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import timedelta, date
-from odoo import models, fields, api
+from odoo import models, fields, api, _
 
 
 class KzmInstanceRequest(models.Model):
@@ -10,6 +10,7 @@ class KzmInstanceRequest(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
     name = fields.Char(string="Designation", tracking=True)
+    reference = fields.Char(string="Reference", tracking=True, default=lambda self: _('New'))
     address_ip = fields.Char(string="IP Address")
     active = fields.Boolean(string="Active", default=True)
     cpu = fields.Char(string="CPU")
@@ -43,3 +44,10 @@ class KzmInstanceRequest(models.Model):
         element = self.env['kzm.instance.request'].search([('limit_date', '<=', date.today() + timedelta(days=5))])
         for x in element:
             x.action_submitted()
+
+    @api.model
+    def create(self, vals):
+        if vals.get('reference', _('New')) == _('New'):
+            vals['reference'] = self.env['ir.sequence'].next_by_code('instance.increment') or _('New')
+        res = super(KzmInstanceRequest, self).create(vals)
+        return res

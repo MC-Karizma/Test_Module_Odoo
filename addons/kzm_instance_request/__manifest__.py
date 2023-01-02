@@ -24,14 +24,15 @@
 
     # always loaded
     'data': [
+        'security/ir.model.access.csv',
+        'security/security.xml',
         'data/activity.xml',
+        'data/data_sequence.xml',
         'data/kzm_instance_request_mail_template.xml',
         'data/kzm_instance_request_mail_template2.xml',
-        'security/security.xml',
-        'security/ir.model.access.csv',
         'views/kzm_instance_request_views.xml',
         'views/odoo_version_views.xml',
-        'data/data.xml',
+        'data/data_odoo_version.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
