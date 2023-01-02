@@ -2,6 +2,7 @@
 
 from datetime import timedelta, date
 from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class KzmInstanceRequest(models.Model):
@@ -51,3 +52,9 @@ class KzmInstanceRequest(models.Model):
             vals['reference'] = self.env['ir.sequence'].next_by_code('instance.increment') or _('New')
         res = super(KzmInstanceRequest, self).create(vals)
         return res
+
+    def unlink(self):
+        for x in self:
+            if x.state != 'Draft':
+                raise ValidationError(_("You can only delete an instance in \"Draft\" status !"))
+            return super(KzmInstanceRequest, x).unlink()
