@@ -10,8 +10,8 @@ class KzmInstanceRequest(models.Model):
     _description = 'Request for Proceedings'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
-    name = fields.Char(string="Designation", tracking=True)
-    reference = fields.Char(string="Reference", tracking=True, default=lambda self: _('New'))
+    name = fields.Char(string="Designation", tracking=True, default=lambda self: _('New'))
+    # reference = fields.Char(string="Reference", tracking=True)
     address_ip = fields.Char(string="IP Address")
     active = fields.Boolean(string="Active", default=True)
     cpu = fields.Char(string="CPU")
@@ -48,8 +48,8 @@ class KzmInstanceRequest(models.Model):
 
     @api.model
     def create(self, vals):
-        if vals.get('reference', _('New')) == _('New'):
-            vals['reference'] = self.env['ir.sequence'].next_by_code('instance.increment') or _('New')
+        if vals.get('name', _('New')) == _('New'):
+            vals['name'] = self.env['ir.sequence'].next_by_code('instance.increment') or _('New')
         res = super(KzmInstanceRequest, self).create(vals)
         return res
 
@@ -61,10 +61,17 @@ class KzmInstanceRequest(models.Model):
 
     def write(self, vals):
         if vals.get('limit_date'):
+            name = self.name
+            deadline = vals.get('limit_date')
             date_time_obj = datetime.strptime(vals['limit_date'], '%Y-%m-%d')
             d = date_time_obj.date()
+            print(self.limit_date)
             if d < date.today():
                 raise ValidationError(_("You cannot set a deadline later than today!"))
+            users = self.env.ref('kzm_instance_request.group_instance_manager').users
+            for user in users:
+                self.activity_schedule('kzm_instance_request.gmail_activity_instance', user_id=user.id,
+                                       note=f'You have to Process {name}', date_deadline=deadline)
         return super(KzmInstanceRequest, self).write(vals)
 
     @api.onchange('state')

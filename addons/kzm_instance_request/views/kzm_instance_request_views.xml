@@ -8,7 +8,6 @@
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="reference"/>
                     <field name="create_uid"/>
                     <field name="name"/>
                     <field name="limit_date"/>
@@ -79,7 +78,7 @@
                     <sheet>
                         <div>
                             <h1 class="oe_title">
-                                <field name="reference" readonly="1"/>
+                                <field name="name" required="True" readonly="1"/>
                             </h1>
                         </div>
                         <group>
@@ -87,7 +86,6 @@
                                 <field name="address_ip"
                                        attrs="{'invisible': [('state', 'in', ('Processed','In processed','Draft'))],'readonly': [('state','=','Processed')]}"/>
                                 <field name="url" attrs="{'readonly': [('state','=','Processed')]}"/>
-                                <field name="name" required="True" attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group>
                                 <field name="cpu" attrs="{'readonly': [('state','=','Processed')]}"/>
@@ -96,12 +94,12 @@
                             </group>
                             <group>
                                 <field name="active" attrs="{'readonly': [('state','=','Processed')]}"/>
-                                <field name="state" attrs="{'readonly': [('state','=','Processed')]}"/>
+                                <field name="state" />
                                 <field name="limit_date" required="True"
                                        attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group rowspan="3">
-                                <field name="treat_date" attrs="{'readonly': [('state','=','Processed')]}"/>
+                                <field name="treat_date"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                         </group>
