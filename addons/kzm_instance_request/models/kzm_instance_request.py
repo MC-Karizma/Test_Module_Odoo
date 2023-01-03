@@ -23,7 +23,7 @@ class KzmInstanceRequest(models.Model):
         default='Draft', string="State", tracking=True)
     limit_date = fields.Date(string="Limit date", tracking=True)
     treat_date = fields.Datetime(string="Treat date")
-    treat_duration = fields.Float(string="Treat duration")
+    treat_duration = fields.Integer(string="Treat duration", compute='_compute_treat_duration')
     partner_id = fields.Many2one(comodel_name='res.partner', string="Client")
     tl_id = fields.Many2one(comodel_name='res.partner', string="Employee")
     tl_user_id = fields.Many2one(comodel_name='res.partner', string="User on employee")
@@ -34,6 +34,11 @@ class KzmInstanceRequest(models.Model):
     def _compute_perimeters_count(self):
         for rec in self:
             rec.perimeters_count = len(rec.perimeters_ids)
+
+    def _compute_treat_duration(self):
+        treat = self.treat_date.date()
+        today = date.today()
+        self.treat_duration = (treat - today).days
 
     _sql_constraints = [
         ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')
