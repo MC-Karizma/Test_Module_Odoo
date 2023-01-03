@@ -25,6 +25,10 @@ class KzmInstanceRequest(models.Model):
     treat_date = fields.Datetime(string="Treat date")
     treat_duration = fields.Float(string="Treat duration")
 
+    _sql_constraints = [
+        ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')
+    ]
+
     def action_draft(self):
         for x in self:
             x.state = "Draft"
