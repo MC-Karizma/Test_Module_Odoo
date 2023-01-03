@@ -44,6 +44,11 @@
                 <search>
                     <field name="name"/>
                     <field name="address_ip"/>
+                    <field name="partner_id"/>
+                    <field name="tl_id"/>
+                    <field name="tl_user_id"/>
+                    <field name="odoo_id"/>
+                    <field name="perimeters_ids"/>
                 </search>
             </field>
         </record>
@@ -55,6 +60,11 @@
                 <search>
                     <field name="cpu"/>
                     <field name="ram"/>
+                    <field name="partner_id"/>
+                    <field name="tl_id"/>
+                    <field name="tl_user_id"/>
+                    <field name="odoo_id"/>
+                    <field name="perimeters_ids"/>
                 </search>
             </field>
         </record>
@@ -111,7 +121,7 @@
                                 <field name="treat_date"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="perimeters_ids" widget="many2many_tags"/>
-                                <field name="perimeters_count" />
+                                <field name="perimeters_count"/>
                             </group>
                         </group>
                     </sheet>
