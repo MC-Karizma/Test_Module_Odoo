@@ -24,6 +24,16 @@ class KzmInstanceRequest(models.Model):
     limit_date = fields.Date(string="Limit date", tracking=True)
     treat_date = fields.Datetime(string="Treat date")
     treat_duration = fields.Float(string="Treat duration")
+    partner_id = fields.Many2one(comodel_name='res.partner', string="Client")
+    tl_id = fields.Many2one(comodel_name='res.partner', string="Employee")
+    tl_user_id = fields.Many2one(comodel_name='res.partner', string="User on employee")
+    odoo_id = fields.Many2one(comodel_name='odoo.version', string="Odoo version")
+    perimeters_ids = fields.Many2many(comodel_name='perimeter', string="Perimeters")
+    perimeters_count = fields.Integer(string='Perimeters count', compute='_compute_perimeters_count')
+
+    def _compute_perimeters_count(self):
+        for rec in self:
+            rec.perimeters_count = len(rec.perimeters_ids)
 
     _sql_constraints = [
         ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')
