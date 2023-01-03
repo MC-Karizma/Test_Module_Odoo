@@ -32,7 +32,9 @@
         'data/kzm_instance_request_mail_template2.xml',
         'views/kzm_instance_request_views.xml',
         'views/odoo_version_views.xml',
+        'views/perimeter.xml',
         'data/data_odoo_version.xml',
+        'data/data_perimeter.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
