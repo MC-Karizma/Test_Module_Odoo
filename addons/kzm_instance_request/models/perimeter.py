@@ -10,3 +10,4 @@ class Perimeter(models.Model):
     name = fields.Char(string="Name")
 
 
+

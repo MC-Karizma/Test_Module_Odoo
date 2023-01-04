@@ -23,10 +23,10 @@ class KzmInstanceRequest(models.Model):
         default='Draft', string="State", tracking=True)
     limit_date = fields.Date(string="Limit date", tracking=True)
     treat_date = fields.Datetime(string="Treat date")
-    treat_duration = fields.Integer(string="Treat duration", compute='_compute_treat_duration')
+    treat_duration = fields.Integer(string="Treat duration", compute='_compute_treat_duration', store=True)
     partner_id = fields.Many2one(comodel_name='res.partner', string="Client")
-    tl_id = fields.Many2one(comodel_name='res.partner', string="Employee")
-    tl_user_id = fields.Many2one(comodel_name='res.partner', string="User on employee")
+    tl_id = fields.Many2one(comodel_name='hr.employee', string="Employee")
+    tl_user_id = fields.Many2one(comodel_name='hr.employee', string="User on employee")
     odoo_id = fields.Many2one(comodel_name='odoo.version', string="Odoo version")
     perimeters_ids = fields.Many2many(comodel_name='perimeter', string="Perimeters")
     perimeters_count = fields.Integer(string='Perimeters count', compute='_compute_perimeters_count')
@@ -35,10 +35,13 @@ class KzmInstanceRequest(models.Model):
         for rec in self:
             rec.perimeters_count = len(rec.perimeters_ids)
 
+    @api.depends('treat_date')
     def _compute_treat_duration(self):
-        treat = self.treat_date.date()
-        today = date.today()
-        self.treat_duration = (treat - today).days
+        for rec in self:
+            if rec.treat_date:
+                treat = rec.treat_date.date()
+                today = date.today()
+                rec.treat_duration = (treat - today).days
 
     _sql_constraints = [
         ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')

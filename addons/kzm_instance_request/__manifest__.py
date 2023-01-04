@@ -20,12 +20,12 @@
     'version': '1.O.O',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'portal'],
+    'depends': ['base', 'mail', 'portal', 'contacts', 'sale_management', 'hr'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'data/activity.xml',
         'data/data_sequence.xml',
         'data/kzm_instance_request_mail_template.xml',
