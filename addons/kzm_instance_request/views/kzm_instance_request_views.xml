@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <data>
+
+        <!-- explicit pivot view definition -->
+        <record id="kzm_instance_request_pivot_view" model="ir.ui.view">
+            <field name="name">Instance Pivot</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <pivot string="Instance">
+                    <field name="treat_duration" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- explicit gantt view definition -->
+        <record id="kzm_instance_request_gantt_view" model="ir.ui.view">
+            <field name="name">Instance Gantt</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <gantt string="Instance Gantt" date_stop="limit_date" date_start="treat_date"
+                       default_group_by="state">
+                </gantt>
+            </field>
+        </record>
+
+        <!-- explicit kanban view definition -->
+        <record id="kzm_instance_request_kanban_view" model="ir.ui.view">
+            <field name="name">Instance Kanban view</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile">
+                    <field name="create_uid"/>
+                    <field name="name"/>
+                    <field name="cpu"/>
+                    <field name="ram"/>
+                    <field name="disk"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            Create by:
+                                            <field name="create_uid"/>
+                                        </li>
+                                        <li>
+                                            Name:
+                                            <field name="name"/>
+                                        </li>
+                                        <li>
+                                            CPU:
+                                            <field name="cpu"/>
+                                        </li>
+                                        <li>
+                                            RAM:
+                                            <field name="ram"/>
+                                        </li>
+                                        <li>
+                                            DISK:
+                                            <field name="disk"/>
+                                        </li>
+                                        <li>
+                                            State:
+                                            <field name="state"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
         <!-- explicit list view definition -->
 
         <record model="ir.ui.view" id="kzm_instance_request_list_view">
@@ -51,6 +125,17 @@
                     <field name="odoo_id"/>
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
+                    <filter name="filter_created_by" string="Created by" domain="[('create_uid','=',uid)]"/>
+                    <separator/>
+                    <filter name="filter_draft" string="Draft" domain="[('state','=','Draft')]"/>
+                    <filter name="filter_submitted" string="Submitted" domain="[('state','=','Submitted')]"/>
+                    <filter name="filter_in_process" string="In process" domain="[('state','=','In process')]"/>
+                    <filter name="filter_processed" string="Processed" domain="[('state','=','Processed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                        <filter string="TL" name="group_by_tl" context="{'group_by':'tl_id'}"/>
+                        <filter string="Odoo Version" name="group_by_version" context="{'group_by':'odoo_id'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -68,6 +153,17 @@
                     <field name="odoo_id"/>
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
+                    <filter name="filter_created_by" string="Created by" domain="[('create_uid','=',uid)]"/>
+                    <separator/>
+                    <filter name="filter_draft" string="Draft" domain="[('state','=','Draft')]"/>
+                    <filter name="filter_submitted" string="Submitted" domain="[('state','=','Submitted')]"/>
+                    <filter name="filter_in_process" string="In process" domain="[('state','=','In process')]"/>
+                    <filter name="filter_processed" string="Processed" domain="[('state','=','Processed')]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                        <filter string="TL" name="group_by_tl" context="{'group_by':'tl_id'}"/>
+                        <filter string="Odoo Version" name="group_by_version" context="{'group_by':'odoo_id'}"/>
+                    </group>
                 </search>
             </field>
         </record>
@@ -146,7 +242,7 @@
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window">
             <field name="name">Instance window</field>
             <field name="res_model">kzm.instance.request</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban,gantt,pivot</field>
             <field name="search_view_id" ref="kzm_instance_request_search_view"/>
             <field name="domain">[('create_uid','=',uid)]</field>
         </record>
@@ -154,7 +250,7 @@
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window2">
             <field name="name">Instance window</field>
             <field name="res_model">kzm.instance.request</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban,gantt,pivot</field>
             <field name="search_view_id" ref="kzm_instance_request_search_view2"/>
             <field name="domain">[('create_uid','=',uid)]</field>
         </record>
@@ -164,7 +260,7 @@
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_S_IP">
             <field name="name">Request in state submitted or in process</field>
             <field name="res_model">kzm.instance.request</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban,gantt,pivot</field>
             <field name="domain">['|',('state','=','Submitted'),('state','=','In Process')]</field>
         </record>
 
@@ -174,7 +270,7 @@
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all">
             <field name="name">Requests</field>
             <field name="res_model">kzm.instance.request</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban,gantt,pivot</field>
         </record>
 
 

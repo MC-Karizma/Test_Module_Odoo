@@ -32,7 +32,7 @@
         <record model="ir.actions.act_window" id="perimeter_action_window">
             <field name="name">Perimeter window</field>
             <field name="res_model">perimeter</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,kanban</field>
         </record>
 
         <!-- Menu -->
