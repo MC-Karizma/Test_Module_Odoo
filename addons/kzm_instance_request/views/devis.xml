@@ -2,6 +2,20 @@
 <odoo>
     <data>
 
+        <!-- Search view -->
+        <record model="ir.ui.view" id="quotation_search_view">
+            <field name="name">Quotation search</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='filter_create_date']" position="after">
+                    <group expand="0" string="Group By">
+                        <filter string="Odoo version" name="group_by_odoo_version" context="{'group_by':'version_odoo_id'}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
         <!-- List view -->
         <record id="quotation_list_view_extend" model="ir.ui.view">
             <field name="name">Quotation list</field>
