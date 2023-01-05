@@ -224,12 +224,12 @@
                             </group>
                             <group>
                                 <field name="active" attrs="{'readonly': [('state','=','Processed')]}"/>
-                                <field name="state"/>
+                                <field name="state" force_save="1" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="limit_date" required="True"
                                        attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group rowspan="3">
-                                <field name="treat_date"/>
+                                <field name="treat_date" force_save="1" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="perimeters_ids" widget="many2many_tags"/>
                                 <field name="perimeters_count"/>
