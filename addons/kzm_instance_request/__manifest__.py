@@ -16,7 +16,7 @@
     'version': '1.O.O',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'portal', 'contacts', 'sale_management', 'hr'],
+    'depends': ['base', 'mail', 'portal', 'contacts', 'sale_management', 'hr', 'sale'],
 
     # always loaded
     'data': [
@@ -28,6 +28,7 @@
         'data/kzm_instance_request_mail_template2.xml',
         'views/kzm_instance_request_views.xml',
         'views/employee.xml',
+        'views/devis.xml',
         'views/odoo_version_views.xml',
         'views/perimeter.xml',
         'data/data_odoo_version.xml',
