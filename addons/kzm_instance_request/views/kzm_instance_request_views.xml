@@ -40,7 +40,7 @@
             <field name="name">Instance Kanban view</field>
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_mobile">
+                <kanban class="o_kanban_mobile" default_group_by="state">
                     <field name="create_uid"/>
                     <field name="name"/>
                     <field name="cpu"/>
@@ -124,7 +124,7 @@
         <!-- explicit search view definition -->
 
         <record model="ir.ui.view" id="kzm_instance_request_search_view">
-            <field name="name">search</field>
+            <field name="name">Search</field>
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
                 <search>
@@ -137,6 +137,7 @@
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
                     <filter name="filter_created_by" string="Created by" domain="[('create_uid','=',uid)]"/>
+                    <filter name="filter_request_in_late" string="Request in late" domain="[('limit_date','&lt;',(context_today() + datetime.timedelta(days=5)).strftime('%%Y-%%m-%%d'))]"/>
                     <separator/>
                     <filter name="filter_draft" string="Draft" domain="[('state','=','Draft')]"/>
                     <filter name="filter_submitted" string="Submitted" domain="[('state','=','Submitted')]"/>
@@ -151,8 +152,9 @@
             </field>
         </record>
 
+
         <record model="ir.ui.view" id="kzm_instance_request_search_view2">
-            <field name="name">search</field>
+            <field name="name">Search 2</field>
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
                 <search>
@@ -164,7 +166,7 @@
                     <field name="odoo_id"/>
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
-                    <filter name="filter_created_by" string="Created by" domain="[('create_uid','=',uid)]"/>
+                    <filter name="filter_created_by2" string="Created by" domain="[('create_uid','=',uid)]"/>
                     <separator/>
                     <filter name="filter_draft" string="Draft" domain="[('state','=','Draft')]"/>
                     <filter name="filter_submitted" string="Submitted" domain="[('state','=','Submitted')]"/>
@@ -256,6 +258,7 @@
             <field name="view_mode">tree,form,kanban,gantt,pivot</field>
             <field name="search_view_id" ref="kzm_instance_request_search_view"/>
             <field name="domain">[('create_uid','=',uid)]</field>
+            <field name="context">{"search_default_filter_created_by":0}</field>
         </record>
 
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window2">
@@ -264,6 +267,7 @@
             <field name="view_mode">tree,form,kanban,gantt,pivot</field>
             <field name="search_view_id" ref="kzm_instance_request_search_view2"/>
             <field name="domain">[('create_uid','=',uid)]</field>
+            <field name="context">{"search_default_filter_created_by2":0}</field>
         </record>
 
         <!-- Action ajouter les menus Responsables > À valider : qui affiche toutes les demandes en état Soumises et  En traitement-->
@@ -283,6 +287,14 @@
             <field name="res_model">kzm.instance.request</field>
             <field name="view_mode">tree,form,kanban,gantt,pivot</field>
         </record>
+
+        <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all_late">
+            <field name="name">Requests</field>
+            <field name="res_model">kzm.instance.request</field>
+            <field name="view_mode">tree,form,kanban,gantt,pivot</field>
+            <field name="context">{"search_default_filter_request_in_late":1}</field>
+        </record>
+
         <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all_graph">
             <field name="name">Requests</field>
             <field name="res_model">kzm.instance.request</field>
@@ -350,6 +362,9 @@
         <menuitem name="Display list of request 2" id="kzm_instance_request_list2"
                   parent="kzm_instance_request_cat"
                   action="kzm_instance_request_action_window2" groups="kzm_instance_request.group_instance_user"/>
+
+        <menuitem name="Request in late" id="kzm_instance_request_in_late" parent="kzm_instance_request.menu_root"
+                  groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window_all_late"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"
                   groups="kzm_instance_request.group_instance_manager"/>
