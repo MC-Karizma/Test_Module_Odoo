@@ -320,7 +320,7 @@
             <field name="name">Submitted</field>
             <field name="model_id" ref="model_kzm_instance_request"/>
             <field name="interval_number">1</field>
-            <field name="interval_type">minutes</field>
+            <field name="interval_type">days</field>
             <field name="type">ir.actions.server</field>
             <field name="numbercall">-1</field>
             <field name="code">model.submitted_cron()</field>

@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "kzm_instance_request",
+    'name': "Instance",
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': "Instance management",
 
-    'description': """
-        Long description of module's purpose
-    """,
+    'description': "This module has been created to help in the request of instance",
 
     'author': "Mamady",
     'website': "https://www.yourcompany.com",
@@ -31,6 +27,7 @@
         'data/kzm_instance_request_mail_template.xml',
         'data/kzm_instance_request_mail_template2.xml',
         'views/kzm_instance_request_views.xml',
+        'views/employee.xml',
         'views/odoo_version_views.xml',
         'views/perimeter.xml',
         'data/data_odoo_version.xml',
@@ -40,6 +37,6 @@
     'demo': [
         'demo/demo.xml',
     ],
-    'application': 'True',
+    'application': 'False',
     'sequence': -100,
 }

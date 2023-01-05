@@ -14,3 +14,13 @@ class Employee(models.Model):
     def _compute_instance_count(self):
         for rec in self:
             rec.instance_count = len(rec.instance_ids)
+
+    def action_my_instances(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Instances',
+            'res_model': 'kzm.instance.request',
+            'domain': [('tl_id', '=', self.name)],
+            'view_mode': 'tree,form',
+            'target': 'current',
+        }
