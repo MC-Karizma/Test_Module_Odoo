@@ -2,6 +2,17 @@
 <odoo>
     <data>
 
+        <!-- explicit graph view definition -->
+        <record id="kzm_instance_request_graph_view" model="ir.ui.view">
+            <field name="name">Instance graph</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="arch" type="xml">
+                <graph string="Instance Analysis" >
+                    <field name="create_date"/>
+                </graph>
+            </field>
+        </record>
+
         <!-- explicit pivot view definition -->
         <record id="kzm_instance_request_pivot_view" model="ir.ui.view">
             <field name="name">Instance Pivot</field>
@@ -272,6 +283,11 @@
             <field name="res_model">kzm.instance.request</field>
             <field name="view_mode">tree,form,kanban,gantt,pivot</field>
         </record>
+        <record model="ir.actions.act_window" id="kzm_instance_request_action_window_all_graph">
+            <field name="name">Requests</field>
+            <field name="res_model">kzm.instance.request</field>
+            <field name="view_mode">graph</field>
+        </record>
 
 
         <!-- Action server  -->
@@ -344,7 +360,7 @@
 
 
         <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root"
-                  groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window"/>
+                  groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window_all_graph"/>
 
         <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"
                   groups="kzm_instance_request.group_instance_administrator"
