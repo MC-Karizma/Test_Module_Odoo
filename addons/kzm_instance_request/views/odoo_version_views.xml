@@ -42,6 +42,12 @@
                         <group>
                             <field name="name"/>
                         </group>
+
+                        <notebook>
+                            <page string="Instances">
+                                <field name="instance_ids"/>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
