@@ -22,6 +22,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'wizard/create_instance_wizard.xml',
         'data/activity.xml',
         'data/data_sequence.xml',
         'data/kzm_instance_request_mail_template.xml',

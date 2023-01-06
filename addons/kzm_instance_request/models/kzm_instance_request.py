@@ -24,7 +24,7 @@ class KzmInstanceRequest(models.Model):
     limit_date = fields.Date(string="Limit date", tracking=True)
     treat_date = fields.Datetime(string="Treat date")
     treat_duration = fields.Integer(string="Treat duration", compute='_compute_treat_duration', store=True)
-    partner_id = fields.Many2one(comodel_name='res.partner', string="Client")
+    partner_id = fields.Many2one(comodel_name='res.partner', string="Customer")
     tl_id = fields.Many2one(comodel_name='hr.employee', string="Employee")
     tl_user_id = fields.Many2one(comodel_name='hr.employee', string="User on employee")
     odoo_id = fields.Many2one(comodel_name='odoo.version', string="Odoo version")
