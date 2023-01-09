@@ -17,22 +17,23 @@ class CreateInstance(models.Model):
     url = fields.Char(string="URL")
     tl_id = fields.Many2one(comodel_name='hr.employee', string="Employee")
 
-    def _default_purchase_order(self):
+    def _default_sale_order(self):
         return self.env['sale.order'].browse(self._context.get('active_ids'))
 
-    purchase_ids = fields.Many2many(comodel_name="sale.order", string="Sale order", required=True,
-                                    default=_default_purchase_order)
+    sale_ids = fields.Many2many(comodel_name="sale.order", string="Sale order", required=True,
+                                default=_default_sale_order)
 
     def action_save(self):
         ids = []
 
         if int(self.cpu) <= 0 or int(self.ram) <= 0 or int(self.disk) <= 0:
             raise ValidationError(_("You can't request instances with zero performance!"))
-        for x in self.purchase_ids:
+        for x in self.sale_ids:
             val = self.env['kzm.instance.request'].create({'cpu': self.cpu, 'ram': self.ram, 'disk': self.disk,
                                                            'tl_id': self.tl_id,
                                                            'limit_date': self.limit_date,
-                                                           'url': self.url, 'partner_id': x.partner_id.id})
+                                                           'url': self.url, 'partner_id': x.partner_id.id,
+                                                           'sale_id': x.id})
             ids.append(val.id)
 
         return {

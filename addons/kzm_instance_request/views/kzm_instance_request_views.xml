@@ -7,7 +7,7 @@
             <field name="name">Instance graph</field>
             <field name="model">kzm.instance.request</field>
             <field name="arch" type="xml">
-                <graph string="Instance Analysis" >
+                <graph string="Instance Analysis">
                     <field name="create_date"/>
                 </graph>
             </field>
@@ -99,6 +99,7 @@
                     <field name="tl_id"/>
                     <field name="tl_user_id"/>
                     <field name="odoo_id"/>
+                    <field name="sale_id"/>
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
                     <field name="limit_date"/>
@@ -137,7 +138,8 @@
                     <field name="perimeters_ids"/>
                     <field name="perimeters_count"/>
                     <filter name="filter_created_by" string="Created by" domain="[('create_uid','=',uid)]"/>
-                    <filter name="filter_request_in_late" string="Request in late" domain="[('limit_date','&lt;',(context_today() + datetime.timedelta(days=5)).strftime('%%Y-%%m-%%d'))]"/>
+                    <filter name="filter_request_in_late" string="Request in late"
+                            domain="[('limit_date','&lt;',(context_today() + datetime.timedelta(days=5)).strftime('%%Y-%%m-%%d'))]"/>
                     <separator/>
                     <filter name="filter_draft" string="Draft" domain="[('state','=','Draft')]"/>
                     <filter name="filter_submitted" string="Submitted" domain="[('state','=','Submitted')]"/>
@@ -229,9 +231,11 @@
                                 <field name="state" force_save="1" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="limit_date" required="True"
                                        attrs="{'readonly': [('state','=','Processed')]}"/>
+                                <field name="treat_date" force_save="1"
+                                       attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group rowspan="3">
-                                <field name="treat_date" force_save="1" attrs="{'readonly': [('state','=','Processed')]}"/>
+                                <field name="sale_id"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="perimeters_ids" widget="many2many_tags"/>
                                 <field name="perimeters_count"/>
@@ -364,7 +368,8 @@
                   action="kzm_instance_request_action_window2" groups="kzm_instance_request.group_instance_user"/>
 
         <menuitem name="Request in late" id="kzm_instance_request_in_late" parent="kzm_instance_request.menu_root"
-                  groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window_all_late"/>
+                  groups="kzm_instance_request.group_instance_user"
+                  action="kzm_instance_request_action_window_all_late"/>
 
         <menuitem name="Manager" id="kzm_instance_manager" parent="kzm_instance_request.menu_root"
                   groups="kzm_instance_request.group_instance_manager"/>
@@ -375,7 +380,8 @@
 
 
         <menuitem name="Analyse" id="kzm_instance_analyse" parent="kzm_instance_request.menu_root"
-                  groups="kzm_instance_request.group_instance_user" action="kzm_instance_request_action_window_all_graph"/>
+                  groups="kzm_instance_request.group_instance_user"
+                  action="kzm_instance_request_action_window_all_graph"/>
 
         <menuitem name="Configuration" id="kzm_instance_configuration" parent="kzm_instance_request.menu_root"
                   groups="kzm_instance_request.group_instance_administrator"

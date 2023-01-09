@@ -31,6 +31,7 @@ class KzmInstanceRequest(models.Model):
     perimeters_ids = fields.Many2many(comodel_name='perimeter', string="Perimeters")
     perimeters_count = fields.Integer(string='Perimeters count', compute='_compute_perimeters_count')
     address_id = fields.Many2one(related='tl_id.address_id', string='Address')
+    sale_id = fields.Many2one(comodel_name='sale.order', string="Purchase order")
 
     def _compute_perimeters_count(self):
         for rec in self:

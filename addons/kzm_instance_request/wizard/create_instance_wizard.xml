@@ -30,8 +30,8 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Purchase order">
-                                <field name="purchase_ids"/>
+                            <page string="Sale order">
+                                <field name="sale_ids"/>
                             </page>
                         </notebook>
                     </sheet>
