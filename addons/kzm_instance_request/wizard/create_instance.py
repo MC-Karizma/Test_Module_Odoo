@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class CreateInstance(models.Model):
@@ -16,7 +17,6 @@ class CreateInstance(models.Model):
     tl = fields.Many2one(comodel_name="hr.employee", string="Employee")
     limit_date = fields.Date(string="Limit date", tracking=True)
     url = fields.Char(string="URL")
-
 
     def _default_purchase_order(self):
         return self.env['sale.order'].browse(self._context.get('active_ids'))
@@ -34,4 +34,11 @@ class CreateInstance(models.Model):
                                                      'tl_id': self.tl.id, 'limit_date': self.limit_date,
                                                      'url': self.url})
 
-
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Instances',
+            'res_model': 'kzm.instance.request',
+            'domain': [('tl_id', '=', self.tl.name)],
+            'view_mode': 'tree',
+            'target': 'current',
+        }
