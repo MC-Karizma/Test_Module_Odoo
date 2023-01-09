@@ -23,18 +23,15 @@
                                 <field name="cpu"/>
                                 <field name="ram"/>
                                 <field name="disk"/>
-                                <field name="tl"/>
                             </group>
                             <group>
                                 <field name="limit_date"/>
-                                <field name="partner_id"/>
-                                <field name="odoo_id"/>
                                 <field name="url"/>
                             </group>
                         </group>
                         <notebook>
                             <page string="Purchase order">
-                                <field name="purchase_order"/>
+                                <field name="purchase_ids"/>
                             </page>
                         </notebook>
                     </sheet>

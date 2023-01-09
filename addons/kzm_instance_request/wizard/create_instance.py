@@ -12,33 +12,34 @@ class CreateInstance(models.Model):
     cpu = fields.Char(string="CPU")
     ram = fields.Char(string="RAM")
     disk = fields.Char(string="DISK")
-    partner_id = fields.Many2one(comodel_name="res.partner", string="Customer")
-    odoo_id = fields.Many2one(comodel_name="odoo.version", string="Odoo version")
-    tl = fields.Many2one(comodel_name="hr.employee", string="Employee")
-    limit_date = fields.Date(string="Limit date", tracking=True)
+    tl_id = fields.Many2one(comodel_name="hr.employee", string="Employee")
+    limit_date = fields.Date(string="Limit date")
     url = fields.Char(string="URL")
+    tl_id = fields.Many2one(comodel_name='hr.employee', string="Employee")
 
     def _default_purchase_order(self):
         return self.env['sale.order'].browse(self._context.get('active_ids'))
 
-    purchase_order = fields.Many2many(comodel_name="sale.order", string="Purchase order", required=True,
-                                      default=_default_purchase_order)
+    purchase_ids = fields.Many2many(comodel_name="sale.order", string="Sale order", required=True,
+                                    default=_default_purchase_order)
 
     def action_save(self):
+        ids = []
 
-        if int(self.cpu) < 0 or int(self.ram) < 0 or int(self.disk) < 0:
+        if int(self.cpu) <= 0 or int(self.ram) <= 0 or int(self.disk) <= 0:
             raise ValidationError(_("You can't request instances with zero performance!"))
-        for x in range(len(self.purchase_order)):
-            self.env['kzm.instance.request'].create({'cpu': self.cpu, 'ram': self.ram, 'disk': self.disk,
-                                                     'partner_id': self.partner_id.id, 'odoo_id': self.odoo_id.id,
-                                                     'tl_id': self.tl.id, 'limit_date': self.limit_date,
-                                                     'url': self.url})
+        for x in self.purchase_ids:
+            val = self.env['kzm.instance.request'].create({'cpu': self.cpu, 'ram': self.ram, 'disk': self.disk,
+                                                           'tl_id': self.tl_id,
+                                                           'limit_date': self.limit_date,
+                                                           'url': self.url, 'partner_id': x.partner_id.id})
+            ids.append(val.id)
 
         return {
             'type': 'ir.actions.act_window',
             'name': 'Instances',
             'res_model': 'kzm.instance.request',
-            'domain': [('tl_id', '=', self.tl.name)],
+            'domain': [('id', '=', ids)],
             'view_mode': 'tree',
             'target': 'current',
         }

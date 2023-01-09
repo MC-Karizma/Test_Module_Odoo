@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="report_user_instance" model="ir.actions.report">
+            <field name="name">User Instance</field>
+            <field name="model">kzm.instance.request</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">kzm.instance.request.report_user_instance</field>
+            <field name="report_file">kzm.instance.request.report_user_instance</field>
+            <field name="binding_model_id" ref="model_kzm_instance_request"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+    </data>
+</odoo>
