@@ -34,6 +34,8 @@
         'views/perimeter.xml',
         'data/data_odoo_version.xml',
         'data/data_perimeter.xml',
+        'report/sale_report_inherit.xml',
+        'report/report_instance.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

@@ -50,7 +50,7 @@
             <field name="model">sale.order</field>
             <field name="inherit_id" ref="sale.view_order_tree"/>
             <field name="arch" type="xml">
-                <xpath expr="/tree" position="inside">
+                <xpath expr="//field[@name='message_needaction']" position="before">
                     <header>
                         <button name="open_wizard" string="Create instance"
                                 type="object" class="oe_highlight"/>
