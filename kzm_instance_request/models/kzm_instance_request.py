@@ -64,6 +64,7 @@ class KzmInstanceRequest(models.Model):
     def action_processed(self):
         for x in self:
             self.state = "Processed"
+            x.treat_date = datetime.now()
 
     def submitted_cron(self):
         element = self.env['kzm.instance.request'].search([('limit_date', '<=', date.today() + timedelta(days=5))])
