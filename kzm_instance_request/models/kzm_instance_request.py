@@ -26,7 +26,7 @@ class KzmInstanceRequest(models.Model):
     treat_duration = fields.Integer(string="Treat duration", compute='_compute_treat_duration', store=True)
     partner_id = fields.Many2one(comodel_name='res.partner', string="Customer")
     tl_id = fields.Many2one(comodel_name='hr.employee', string="Employee")
-    tl_user_id = fields.Many2one(comodel_name='hr.employee', string="User on employee")
+    tl_user_id = fields.Many2one(related='tl_id.user_id', string="User on employee")
     odoo_id = fields.Many2one(comodel_name='odoo.version', string="Odoo version")
     perimeters_ids = fields.Many2many(comodel_name='perimeter', string="Perimeters")
     perimeters_count = fields.Integer(string='Perimeters count', compute='_compute_perimeters_count')

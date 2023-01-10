@@ -24,18 +24,36 @@
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div t-if="o.name" class="col-xs-2" style="margin:auto;">
-                                    <span t-field="o.name"/>
-                                    <span t-field="o.partner_id.name" style="margin-left:15cm"/>
+                                    <div style=" float: left;width: 33.33%; padding: 10px;">
+                                        <strong>Designation : </strong>
+                                        <span t-field="o.name"/>
+                                    </div>
+                                    <div style=" float: left;width: 33.33%; padding: 10px;">
+                                    </div>
+                                    <div style=" float: left;width: 33.33%; padding: 10px; text-align: right;">
+                                        <strong>Customer : </strong>
+                                        <span t-field="o.partner_id.name"/>
+                                    </div>
                                     <br></br>
-                                    <span t-field="o.odoo_id.name"/>
-                                    <span t-field="o.tl_id.name" style="margin-left:8cm"/>
-                                    <span t-field="o.limit_date" style="margin-left:5cm"/>
+                                    <br></br>
+                                    <div style=" float: left;width: 33.33%; padding: 10px; text-align: left;">
+                                        <strong>Odoo version : </strong>
+                                        <span t-field="o.odoo_id.name"/>
+                                    </div>
+                                    <div style=" float: left;width: 33.33%; padding: 10px; text-align: center;">
+                                        <strong>Employee name : </strong>
+                                        <span t-field="o.tl_id.name"/>
+                                    </div>
+                                    <div style=" float: left;width: 33.33%; padding: 10px; text-align: right;">
+                                        <strong>Limit date : </strong>
+                                       <span t-field="o.limit_date"/>
+                                    </div>
                                 </div>
                                 <br></br>
                             </div>
                             <br></br>
                             <br></br>
-                            <table class="table table-sm o_main_table mt-4">
+                            <table class="table table-sm o_main_table mt-4 table-bordered">
                                 <thead style="display: table-row-group">
                                     <tr>
                                         <th name="th_CPU" class="text-start">CPU</th>

@@ -216,9 +216,6 @@
                                 <field name="tl_id"/>
                                 <field name="tl_user_id"/>
                                 <field name="odoo_id"/>
-                                <field name="address_ip"
-                                       attrs="{'invisible': [('state', 'in', ('Processed','In processed','Draft'))],'readonly': [('state','=','Processed')]}"/>
-                                <field name="url" attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group>
                                 <field name="cpu" attrs="{'readonly': [('state','=','Processed')]}"/>
@@ -227,14 +224,15 @@
                                 <field name="disk" attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
                             <group>
-                                <field name="active" attrs="{'readonly': [('state','=','Processed')]}"/>
-                                <field name="state" force_save="1" attrs="{'readonly': [('state','=','Processed')]}"/>
+                                <field name="address_ip"
+                                       attrs="{'invisible': [('state', 'in', ('Processed','In processed','Draft'))],'readonly': [('state','=','Processed')]}"/>
+                                <field name="url" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="limit_date" required="True"
                                        attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="treat_date" force_save="1"
                                        attrs="{'readonly': [('state','=','Processed')]}"/>
                             </group>
-                            <group rowspan="3">
+                            <group>
                                 <field name="sale_id"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="perimeters_ids" widget="many2many_tags"/>
