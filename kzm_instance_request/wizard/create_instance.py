@@ -2,10 +2,9 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
-from datetime import datetime
 
 
-class CreateInstance(models.Model):
+class CreateInstance(models.TransientModel):
     _name = "create.instance.wizard"
     _description = 'Request instance wizard'
 
