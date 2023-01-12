@@ -40,6 +40,6 @@ class CreateInstance(models.TransientModel):
             'name': 'Instances',
             'res_model': 'kzm.instance.request',
             'domain': [('id', '=', ids)],
-            'view_mode': 'tree',
+            'view_mode': 'tree,form',
             'target': 'current',
         }
