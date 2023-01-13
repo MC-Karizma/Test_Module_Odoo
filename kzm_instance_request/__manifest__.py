@@ -6,8 +6,8 @@
 
     'description': "This module has been created to help in the request of instance",
 
-    'author': "Mamady",
-    'website': "https://www.yourcompany.com",
+    'author': "Camara Mamady",
+    'website': "https://github.com/MC-Karizma/Test_Module_Odoo",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml

@@ -37,13 +37,13 @@ class KzmInstanceRequest(models.Model):
         for rec in self:
             rec.perimeters_count = len(rec.perimeters_ids)
 
-    @api.depends('treat_date')
+    """@api.depends('treat_date')
     def _compute_treat_duration(self):
         for rec in self:
             if rec.treat_date:
                 treat = rec.treat_date.date()
                 today = date.today()
-                rec.treat_duration = (treat - today).days
+                rec.treat_duration = (treat - today).days"""
 
     _sql_constraints = [
         ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')
