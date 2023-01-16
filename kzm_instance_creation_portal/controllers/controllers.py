@@ -32,16 +32,17 @@ class KzmInstanceCreationPortal(http.Controller):
             'name': {'label': _('Name'), 'order': 'name'},
             'odoo_version': {'label': _('Odoo version'), 'order': 'odoo_id'},
         }
-        searchbar_filters = {
+        """ searchbar_filters = {
             'draft': {'label': _('Draft'), 'domain': [('state', '=', 'Draft')]},
             'submitted': {'label': _('Submitted'), 'domain': [('state', '=', 'Submitted')]},
             'in_process': {'label': _('In process'), 'domain': [('state', '=', 'In process')]},
             'processed': {'label': _('Processed'), 'domain': [('state', '=', 'Processed')]},
-        }
+        } """
 
-        if not filterby:
+        """         if not filterby:
             filterby = 'draft'
-        domain = AND([domain, searchbar_filters[filterby]['domain']])
+        domain = AND([domain, searchbar_filters[filterby]['domain']]) """
+
         if not sortby:
             sortby = 'partner'
         order = searchbar_sortings[sortby]['order']
@@ -51,8 +52,8 @@ class KzmInstanceCreationPortal(http.Controller):
                               {'instances': instances, 'page_name': 'instance',
                                'searchbar_sortings': searchbar_sortings,
                                'sortby': sortby,
-                               'searchbar_filters': searchbar_filters,
-                               'filterby': filterby
+                               #'searchbar_filters': searchbar_filters,
+                              # 'filterby': filterby
                                })
 
     @http.route('/form_create_instance', auth='public', website=True)
