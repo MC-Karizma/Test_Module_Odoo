@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 from collections import OrderedDict
-
-from odoo import http, _
+from odoo import http, _, fields, SUPERUSER_ID
 from odoo.http import request
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 from odoo.osv.expression import AND, OR
 from datetime import datetime
+from odoo.exceptions import AccessError, MissingError, ValidationError
+from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.tools import groupby as groupbyelem
 from operator import itemgetter
 
@@ -18,7 +19,7 @@ class InstanceCustomerPortal(CustomerPortal):
             ('create_uid', '=', my_user.id),
         ]
 
-    @http.route('/list', auth='public', website=True)
+    @http.route('/my/instances', auth='public', website=True)
     def index(self, page=1, sortby=None, filterby=None, search=None, search_in='name', groupby='none', **kw):
         domain = self._get_portal_default_domain()
         searchbar_sortings = {
@@ -104,6 +105,64 @@ class InstanceCustomerPortal(CustomerPortal):
                                # 'searchbar_filters': searchbar_filters,
                                # 'filterby': filterby
                                })
+
+    @http.route(['/my/instances/<int:instance_id>'], type='http', auth="public", website=True)
+    def portal_order_page(self, instance_id, report_type=None, access_token=None, message=False, download=False, **kw):
+        try:
+            instance_sudo = self._document_check_access('kzm.instance.request', instance_id, access_token=access_token)
+        except (AccessError, MissingError):
+            return request.redirect('/my')
+
+        if report_type in ('html', 'pdf', 'text'):
+            return self._show_report(model=instance_sudo, report_type=report_type,
+                                     report_ref='kzm_instance_request.instance_action_report', download=download)
+
+        if request.env.user.share and access_token:
+            # If a public/portal user accesses the order with the access token
+            # Log a note on the chatter.
+            today = fields.Date.today().isoformat()
+            session_obj_date = request.session.get('view_quote_%s' % instance_sudo.id)
+            if session_obj_date != today:
+                # store the date as a string in the session to allow serialization
+                request.session['view_quote_%s' % instance_sudo.id] = today
+                # The "Quotation viewed by customer" log note is an information
+                # dedicated to the salesman and shouldn't be translated in the customer/website lgg
+                context = {'lang': instance_sudo.user_id.partner_id.lang or instance_sudo.company_id.partner_id.lang}
+                msg = _('Quotation viewed by customer %s', instance_sudo.partner_id.name)
+                del context
+                _message_post_helper(
+                    "kzm_instance_request.kzm.instance.request",
+                    instance_sudo.id,
+                    message=msg,
+                    token=instance_sudo.access_token,
+                    message_type="notification",
+                    subtype_xmlid="mail.mt_note",
+                    partner_ids=instance_sudo.user_id.sudo().partner_id.ids,
+                )
+
+        backend_url = f'/web#model={instance_sudo._name}' \
+                      f'&id={instance_sudo.id}' \
+                      f'&view_type=form'
+        values = {
+            'instance_order': instance_sudo,
+            'message': message,
+            'report_type': 'html',
+            'backend_url': backend_url,
+        }
+
+        # Payment values
+        """ if order_sudo._has_to_be_paid():
+            values.update(self._get_payment_values(order_sudo))
+
+        if order_sudo.state in ('draft', 'sent', 'cancel'):
+            history_session_key = 'my_quotations_history'
+        else:"""
+        history_session_key = 'my_instances_history'
+
+        values = self._get_page_view_values(
+            instance_sudo, access_token, values, history_session_key, False)
+
+        return request.render('kzm_instance_creation_portal.instance_order_portal_template', values)
 
     @http.route('/form_create_instance', auth='public', website=True)
     def instance_form(self, **kw):

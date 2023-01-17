@@ -104,3 +104,10 @@ class KzmInstanceRequest(models.Model):
         if self.state:
             if self.state == "Processed":
                 self.treat_date = datetime.now()
+
+
+    # PORTAL
+    def _get_portal_return_action(self):
+        """ Return the action used to display orders when returning from customer portal. """
+        self.ensure_one()
+        return self.env.ref('kzm_instance_request_action_window')
