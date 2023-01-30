@@ -150,6 +150,9 @@
                         <filter string="TL" name="group_by_tl" context="{'group_by':'tl_id'}"/>
                         <filter string="Odoo Version" name="group_by_version" context="{'group_by':'odoo_id'}"/>
                     </group>
+                    <searchpanel>
+                        <field name="odoo_id" icon="fa-arrow-right" select="multi" enable_counters="1"/>
+                    </searchpanel>
                 </search>
             </field>
         </record>
