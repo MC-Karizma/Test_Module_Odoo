@@ -237,7 +237,7 @@
                             <group>
                                 <field name="sale_id"/>
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
-                                <field name="perimeters_ids" widget="many2many_tags"/>
+                                <field name="perimeters_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                                 <field name="perimeters_count"/>
                             </group>
                         </group>

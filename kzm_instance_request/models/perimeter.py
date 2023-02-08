@@ -8,6 +8,8 @@ class Perimeter(models.Model):
     _description = 'Perimeter'
 
     name = fields.Char(string="Name")
+    color = fields.Integer('Color Index')
+
 
 
 

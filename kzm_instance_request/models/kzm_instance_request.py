@@ -11,7 +11,6 @@ class KzmInstanceRequest(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
 
     name = fields.Char(string="Designation", tracking=True, default=lambda self: _('New'))
-    # reference = fields.Char(string="Reference", tracking=True)
     address_ip = fields.Char(string="IP Address")
     active = fields.Boolean(string="Active", default=True)
     cpu = fields.Char(string="CPU")
@@ -37,13 +36,13 @@ class KzmInstanceRequest(models.Model):
         for rec in self:
             rec.perimeters_count = len(rec.perimeters_ids)
 
-    """@api.depends('treat_date')
+    @api.depends('treat_date')
     def _compute_treat_duration(self):
         for rec in self:
             if rec.treat_date:
                 treat = rec.treat_date.date()
                 today = date.today()
-                rec.treat_duration = (treat - today).days"""
+                rec.treat_duration = (treat - today).days
 
     _sql_constraints = [
         ('unique_ip_address', 'UNIQUE (address_ip)', 'Ip Address must be unique')
