@@ -24,15 +24,19 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/estate_property_type_data.xml',
         'views/estate_property_views.xml',
         'views/estate_property_type_views.xml',
         'views/estate_property_tag_views.xml',
         'views/estate_property_offer_views.xml',
+        'views/inherited_res_users.xml',
         'views/estate_menu.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
+        'demo/estate_property_demo.xml',
+        'demo/estate_property_offer_demo.xml',
     ],
     'application': True,
+    'sequence': -110,
 }

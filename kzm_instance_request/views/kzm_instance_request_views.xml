@@ -239,6 +239,7 @@
                                 <field name="treat_duration" attrs="{'readonly': [('state','=','Processed')]}"/>
                                 <field name="perimeters_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
                                 <field name="perimeters_count"/>
+                                <field name="prix"/>
                             </group>
                         </group>
                     </sheet>

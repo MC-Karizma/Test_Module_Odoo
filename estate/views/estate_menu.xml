@@ -2,7 +2,8 @@
     <data>
 
         <!-- Estate property menu -->
-        <menuitem id="estate_property_root_menu" name="Real Estate"/>
+        <menuitem id="estate_property_root_menu" name="Real Estate"
+                  web_icon="estate,static/description/estate.jpg"/>
         <menuitem id="estate_property_advertisements" name="Advertisements" parent="estate_property_root_menu"/>
         <menuitem id="estate_property_properties" name="Properties" parent="estate_property_advertisements"
                   action="estate_property_action_window"/>
