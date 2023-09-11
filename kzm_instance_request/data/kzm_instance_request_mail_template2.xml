@@ -6,8 +6,8 @@
             <field name="name">Instance created template</field>
             <field name="model_id" ref="kzm_instance_request.model_kzm_instance_request"/>
             <field name="subject">Instance created</field>
-            <field name="email_from">c.mamady@karizma.ma</field>
-            <field name="email_to">mc557164@gmail.com</field>
+            <field name="email_from">'Put email from here'</field>
+            <field name="email_to">'Put email to here'</field>
             <!--<field name="description">Invitation email to contacts to create a user account</field>-->
             <field name="body_html" type="html">
                 <table border="0" cellpadding="0" cellspacing="0"
